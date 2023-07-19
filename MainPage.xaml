@@ -1,40 +1,153 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MyToDo.MainPage">
+             x:Class="MyToDo.MainPage"
+			 x:Name="MyToDoMainPage"
+             Title="ToDoPage"
+			 BackgroundColor="LightGray">
 
-    <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
 
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
+	<ScrollView>
+		<VerticalStackLayout Margin="50,10,50,10" x:Name="ToDoList" Spacing="10">
+			<!--<Frame CornerRadius="10" Padding="0" HasShadow="False" BorderColor="LightGray">
+			<Grid Background="gray" Padding="10">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
 
-            <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
+				<StackLayout Spacing="10" Grid.Column="0">
+					<Label FontSize="16">
+					</Label>
+					<HorizontalStackLayout Spacing="40">
+						<HorizontalStackLayout Spacing="5">
+							<Label>
+								Deadline
+							</Label>
+							<Label>
+								10/10/2022
+							</Label>
+						</HorizontalStackLayout>
+						<Label IsVisible="False">
+							Recurring
+						</Label>
+					</HorizontalStackLayout>
+				</StackLayout>
+				
+				<StackLayout Grid.Column="1" HorizontalOptions="End">
+					<CheckBox CheckedChanged="CheckBox_CheckedChanged"></CheckBox>
+				</StackLayout>
+			</Grid>
+		</Frame>-->
 
-			<Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
-			<Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
+			<Button Clicked="InitializeNewToDoButton_Clicked"
+					Text="New To Do"
+					TextColor="Black"
+					WidthRequest="150"
+					x:Name="InitializeNewToDoButton"/>
 
-        </VerticalStackLayout>
-    </ScrollView>
+
+			<Frame CornerRadius="10" 
+				   Padding="0"
+				   HasShadow="False"
+				   BorderColor="LightBlue"
+				   x:Name="NewToDoFrame"
+				   IsVisible="False">
+
+				<Grid Background="#7dafff" 
+					  Padding="10">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="*"/>
+					</Grid.ColumnDefinitions>
+
+					<Grid ColumnSpacing="10">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto"/>
+							<ColumnDefinition Width="Auto"/>
+						</Grid.ColumnDefinitions>
+
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="Auto"/>
+						</Grid.RowDefinitions>
+
+						<Label Grid.Row="0" 
+							   Grid.Column="0" 
+							   FontSize="16" 
+							   TextColor="Black" 
+							   FontAttributes="Bold" 
+							   VerticalTextAlignment="Center">
+							Title
+						</Label>
+
+						<Entry Grid.Row="0"
+							   Grid.Column="1"
+							   FontSize="14" 
+							   TextColor="Black" 
+							   BackgroundColor="Azure"
+							   WidthRequest="380"
+							   x:Name="NewToDoTitle"
+							    Placeholder="Enter title"
+							   />
+
+						<Label Grid.Row="1" 
+							   Grid.Column="0" 
+							   FontSize="16" 
+							   TextColor="Black"
+							   FontAttributes="Bold"
+							   VerticalTextAlignment="Center">
+							Deadline
+						</Label>
+
+						<HorizontalStackLayout	Grid.Row="1"
+												Grid.Column="1" 
+												Spacing="5">
+							<DatePicker FontSize="16" 
+										TextColor="Black"
+										BackgroundColor="Azure"
+										x:Name="NewToDoDate"/>
+							<TimePicker FontSize="16" 
+										TextColor="Black" 
+										BackgroundColor="Azure" 
+										Format="24HourClock" 
+										Margin="0,10,0,0"
+										x:Name="NewToDoTime"/>
+						</HorizontalStackLayout>
+
+						<Label Grid.Row="2" 
+							   Grid.Column="0" 
+							   FontSize="16" 
+							   TextColor="Black" 
+							   FontAttributes="Bold" 
+							   VerticalTextAlignment="Center">
+							Recurring?
+						</Label>
+
+						<CheckBox Grid.Row="2"
+								  Grid.Column="1"
+								  x:Name="NewToDoIsRecurring"/>
+
+					</Grid>
+
+
+
+					<StackLayout Grid.Column="1" 
+								 HorizontalOptions="End"
+								 Spacing="5">
+						<Button Text="Add new To Do" 
+								TextColor="Black"
+								Clicked="AddNewToDoButton_Clicked"/>
+						<Button Text="Discard" 
+								TextColor="Black"
+								Clicked="DiscardToDoButton_Clicked"
+								x:Name="DiscardNewToDoButton"/>
+					</StackLayout>
+				</Grid>
+			</Frame>
+		</VerticalStackLayout>
+
+	</ScrollView>
 
 </ContentPage>

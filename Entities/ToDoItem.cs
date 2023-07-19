@@ -1,5 +1,5 @@
 ﻿namespace MyToDo.Entities {
-	class ToDoItem {
+	public class ToDoItem {
 
 		public Guid Id { get; set; }
 		public String Title { get; set; }

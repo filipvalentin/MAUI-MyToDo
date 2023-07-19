@@ -1,6 +1,7 @@
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Shapes;
 using MyToDo.Entities;
+using MyToDo.Storage;
 
 namespace MyToDo;
 
@@ -77,6 +78,8 @@ public partial class ToDoPage : ContentPage {
 				),
 			IsRecurring = NewToDoIsRecurring.IsChecked
 		};
+
+		ToDoListSingleton.Instance.Add(newItem);
 	}
 
 	private void InitializeNewToDoButton_Clicked(object sender, EventArgs e) {
@@ -88,7 +91,9 @@ public partial class ToDoPage : ContentPage {
 		InitializeNewToDoButton.IsVisible = true;
 		NewToDoFrame.IsVisible = false;
 		NewToDoTitle.Text = null;
-
+		NewToDoTime.Time = new TimeSpan();
+		NewToDoDate.Date = DateTime.Now;
+		NewToDoIsRecurring.IsChecked = false;
 	}
 
 
