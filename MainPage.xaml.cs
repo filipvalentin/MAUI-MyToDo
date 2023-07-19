@@ -1,33 +1,31 @@
 ﻿using MyToDo.Entities;
 using MyToDo.Storage;
-using System.Diagnostics;
 
 namespace MyToDo;
 
 public partial class MainPage : ContentPage {
 
 	private static readonly Color lightGrayColor = Color.FromArgb("#8b8b8c");
-	private Dictionary<Guid, Guid> idMap;
+	private Dictionary<Guid, ToDoItem> idMap;
+	private Dictionary<Guid, Frame> idMap_CheckBoxToFrame;
 
 	IToDoItemManager todoManager;
 
 	public MainPage() {
 		InitializeComponent();
-		idMap = new Dictionary<Guid, Guid>();
+		idMap = new Dictionary<Guid, ToDoItem>();
+		idMap_CheckBoxToFrame = new Dictionary<Guid, Frame>();
 		todoManager = new SqliteToDoItemManager();
 		todoManager.CreateDBFile();
 		MyToDoMainPage.Loaded += LoadToDos;
 	}
 
 	private void LoadToDos(object sender, EventArgs e) {
-		try {
-			foreach (ToDoItem item in todoManager.GetAllItems()) {
-				AddItemToPanel(item);
-			}
+
+		foreach (ToDoItem item in todoManager.GetAllItems()) {
+			AddItemToPanel(item);
 		}
-		catch (Exception ex) {
-			Debug.WriteLine(ex);
-		}
+
 	}
 
 
@@ -61,7 +59,8 @@ public partial class MainPage : ContentPage {
 		StackLayout checkBoxSL = new() { HorizontalOptions = LayoutOptions.End };
 		CheckBox cb = new();
 		cb.CheckedChanged += new EventHandler<CheckedChangedEventArgs>(CheckBox_CheckChanged);
-		idMap.Add(cb.Id, item.Id);
+		idMap.Add(cb.Id, item);
+		idMap_CheckBoxToFrame.Add(cb.Id, frame);
 		checkBoxSL.Add(cb);
 		grid.SetColumn(checkBoxSL, 1);
 		grid.Add(checkBoxSL);
@@ -72,12 +71,13 @@ public partial class MainPage : ContentPage {
 	}
 
 	private void CheckBox_CheckChanged(object sender, CheckedChangedEventArgs e) {
-
 		Guid checkBoxId = ((CheckBox)sender).Id;
 
-		//ToDoList.Add(new Label() { Text = idMap[checkBoxId].ToString() });
-
+		Thread.Sleep(200);
+		todoManager.DeleteItem(idMap[checkBoxId]);
+		ToDoList.Remove(idMap_CheckBoxToFrame[checkBoxId]);
 	}
+
 
 	private async void AddNewToDoButton_Clicked(object sender, EventArgs e) {
 

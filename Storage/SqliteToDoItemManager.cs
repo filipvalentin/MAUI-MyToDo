@@ -43,7 +43,12 @@ namespace MyToDo.Storage {
 
 
 		public void DeleteItem(ToDoItem item) {
-
+			using var connection = new SqliteConnection("Data Source=" + dbPath);
+			connection.Open();
+			var command = connection.CreateCommand();
+			command.CommandText = @"DELETE FROM TODOS WHERE ID = $id";
+			command.Parameters.AddWithValue("$id", item.Id);
+			command.ExecuteNonQuery();
 		}
 
 
