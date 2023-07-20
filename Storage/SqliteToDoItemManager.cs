@@ -20,6 +20,7 @@ namespace MyToDo.Storage {
 
 		}
 
+		//avoids creating a list by itself
 		public IEnumerable<ToDoItem> GetAllItems() {
 			using var connection = new SqliteConnection("Data Source=" + dbPath);
 			connection.Open();
@@ -30,14 +31,13 @@ namespace MyToDo.Storage {
 			using var reader = command.ExecuteReader();
 			while (reader.Read()) {
 				//items.Add(
-				yield return new ToDoItem() {
+				yield return new ToDoItem() { //thought process: yield return would be fit sinc
 					Id = reader.GetGuid(0),
 					Title = reader.GetString(1),
 					Deadline = DateTime.ParseExact(reader.GetString(2), "dd/MM/yyyy HH:mm:ss", null),
 					IsRecurring = reader.GetBoolean(3),
 				};
 			}
-
 			//return items;
 		}
 
@@ -52,9 +52,14 @@ namespace MyToDo.Storage {
 		}
 
 
-
-		public void UpdateItem(ToDoItem item) {
-			throw new NotImplementedException();
+		public void UpdateDeadline(ToDoItem item) {
+			using var connection = new SqliteConnection("Data Source=" + dbPath);
+			connection.Open();
+			var command = connection.CreateCommand();
+			command.CommandText = @"UPDATE TODOS SET DEADLINE = $deadline WHERE ID = $id";
+			command.Parameters.AddWithValue("$deadline", item.Deadline.ToString());
+			command.Parameters.AddWithValue("$id", item.Id);
+			command.ExecuteNonQuery();
 		}
 
 		public void CreateDBFile() {

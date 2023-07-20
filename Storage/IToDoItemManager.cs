@@ -6,7 +6,7 @@ namespace MyToDo.Storage {
 		void SaveItem(ToDoItem item);
 		IEnumerable<ToDoItem> GetAllItems();
 		void DeleteItem(ToDoItem item);
-		void UpdateItem(ToDoItem item);
+		void UpdateDeadline(ToDoItem item);
 		void CreateDBFile();
 	}
 }

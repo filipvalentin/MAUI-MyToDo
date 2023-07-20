@@ -1,15 +1,14 @@
 ﻿using MyToDo.Entities;
 using MyToDo.Storage;
-
 namespace MyToDo;
 
 public partial class MainPage : ContentPage {
 
 	private static readonly Color lightGrayColor = Color.FromArgb("#8b8b8c");
-	private Dictionary<Guid, ToDoItem> idMap;
-	private Dictionary<Guid, Frame> idMap_CheckBoxToFrame;
+	private readonly Dictionary<Guid, ToDoItem> idMap;
+	private readonly Dictionary<Guid, Frame> idMap_CheckBoxToFrame;
 
-	IToDoItemManager todoManager;
+	readonly IToDoItemManager todoManager;
 
 	public MainPage() {
 		InitializeComponent();
@@ -25,6 +24,7 @@ public partial class MainPage : ContentPage {
 		foreach (ToDoItem item in todoManager.GetAllItems()) {
 			AddItemToPanel(item);
 		}
+
 
 	}
 
@@ -76,6 +76,8 @@ public partial class MainPage : ContentPage {
 		Thread.Sleep(200);
 		todoManager.DeleteItem(idMap[checkBoxId]);
 		ToDoList.Remove(idMap_CheckBoxToFrame[checkBoxId]);
+
+
 	}
 
 
