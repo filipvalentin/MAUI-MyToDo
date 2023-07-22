@@ -31,6 +31,10 @@
 						<Label IsVisible="False">
 							Recurring
 						</Label>
+						<HorizontalStackLayout Spacing="5">
+							<Label>Acknowledged</Label>
+							<Label>yes/no</Label>
+						</HorizontalStackLayout>
 					</HorizontalStackLayout>
 				</StackLayout>
 				

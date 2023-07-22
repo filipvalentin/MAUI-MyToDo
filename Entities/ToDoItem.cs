@@ -5,6 +5,7 @@
 		public String Title { get; set; }
 		public DateTime Deadline { get; set; }
 		public bool IsRecurring { get; set; }
+		public bool Acknowledged { get; set; }
 
 	}
 }

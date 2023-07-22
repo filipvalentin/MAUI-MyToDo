@@ -1,5 +1,7 @@
 ﻿using MyToDo.Entities;
 using MyToDo.Storage;
+using UIKit;
+
 namespace MyToDo;
 
 public partial class MainPage : ContentPage {
@@ -24,12 +26,45 @@ public partial class MainPage : ContentPage {
 		foreach (ToDoItem item in todoManager.GetAllItems()) {
 			AddItemToPanel(item);
 		}
-
-
 	}
 
 
 	private void AddItemToPanel(ToDoItem item) {
+
+		/*< !--< Frame CornerRadius = "10" Padding = "0" HasShadow = "False" BorderColor = "LightGray" >
+			< Grid Background = "gray" Padding = "10" >
+				< Grid.ColumnDefinitions >
+					< ColumnDefinition Width = "Auto" />
+					< ColumnDefinition Width = "*" />
+				</ Grid.ColumnDefinitions >
+				< StackLayout Spacing = "10" Grid.Column = "0" >
+					< Label FontSize = "16" >
+					</ Label >
+					< HorizontalStackLayout Spacing = "40" >
+						< HorizontalStackLayout Spacing = "5" >
+							< Label >
+								Deadline
+							</ Label >
+							< Label >
+								10 / 10 / 2022
+							</ Label >
+						</ HorizontalStackLayout >
+						< Label IsVisible = "False" >
+							Recurring
+						</ Label >
+						< HorizontalStackLayout Spacing = "5" >
+							< Label > Acknowledged </ Label >
+							< Label > yes / no </ Label >
+						</ HorizontalStackLayout >
+					</ HorizontalStackLayout >
+				</ StackLayout >
+				< StackLayout Grid.Column = "1" HorizontalOptions = "End" >
+					< CheckBox CheckedChanged = "CheckBox_CheckedChanged" ></ CheckBox >
+				</ StackLayout >
+			</ Grid >
+		</ Frame > -->
+*/
+		
 		Frame frame = new() {
 			CornerRadius = 10,
 			Padding = 0,
@@ -52,6 +87,12 @@ public partial class MainPage : ContentPage {
 		hsl.Add(deadlineHSL);
 		if (item.IsRecurring)
 			hsl.Add(new Label() { Text = "Recurring" });
+
+		HorizontalStackLayout hslAck = new() { Spacing = 5 };
+		hslAck.Add(new Label() { Text = "Acknowledged:" });
+		hslAck.Add(new Label() { Text = item.Acknowledged ? "yes" : "no" });
+		hsl.Add(hslAck);
+
 		stackLayout.Add(hsl);
 		grid.SetColumn(stackLayout, 0);
 		grid.Add(stackLayout);
@@ -76,8 +117,6 @@ public partial class MainPage : ContentPage {
 		Thread.Sleep(200);
 		todoManager.DeleteItem(idMap[checkBoxId]);
 		ToDoList.Remove(idMap_CheckBoxToFrame[checkBoxId]);
-
-
 	}
 
 
@@ -98,7 +137,8 @@ public partial class MainPage : ContentPage {
 				NewToDoTime.Time.Minutes,
 				NewToDoTime.Time.Seconds
 				),
-			IsRecurring = NewToDoIsRecurring.IsChecked
+			IsRecurring = NewToDoIsRecurring.IsChecked,
+			Acknowledged = false
 		};
 
 		DiscardToDoButton_Clicked(this, EventArgs.Empty);
