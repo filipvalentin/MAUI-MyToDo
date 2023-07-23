@@ -10,7 +10,7 @@
 	IgnorableNamespaces="uap rescap"
 	>
 
-	<Identity Name="maui-package-name-placeholder" Publisher="CN=User Name" Version="0.0.0.0" />
+	<Identity Name="maui-package-name-placeholder" Publisher="CN=filip" Version="0.0.1.0" />
 
 	<mp:PhoneIdentity PhoneProductId="0527FC4E-9EF9-4236-A64F-584EB4F39577" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 

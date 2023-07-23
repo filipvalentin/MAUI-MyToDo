@@ -1,5 +1,3 @@
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Controls.Shapes;
 using MyToDo.Entities;
 using MyToDo.Storage;
 
@@ -37,8 +35,8 @@ public partial class ToDoPage : ContentPage {
 		deadlineHSL.Add(new Label() { Text = "Deadline" });
 		deadlineHSL.Add(new Label() { Text = item.Deadline.ToString() });
 		hsl.Add(deadlineHSL);
-		if (item.IsRecurring)
-			hsl.Add(new Label() { Text = "Recurring" });
+		//if (item.IsRecurring)
+		//	hsl.Add(new Label() { Text = "Recurring" });
 		stackLayout.Add(hsl);
 		grid.SetColumn(stackLayout, 0);
 		grid.Add(stackLayout);
@@ -76,7 +74,7 @@ public partial class ToDoPage : ContentPage {
 				NewToDoTime.Time.Minutes,
 				NewToDoTime.Time.Seconds
 				),
-			IsRecurring = NewToDoIsRecurring.IsChecked
+			//IsRecurring = NewToDoIsRecurring.IsChecked
 		};
 
 		ToDoListSingleton.Instance.Add(newItem);
@@ -93,7 +91,7 @@ public partial class ToDoPage : ContentPage {
 		NewToDoTitle.Text = null;
 		NewToDoTime.Time = new TimeSpan();
 		NewToDoDate.Date = DateTime.Now;
-		NewToDoIsRecurring.IsChecked = false;
+		//NewToDoIsRecurring.IsChecked = false;
 	}
 
 

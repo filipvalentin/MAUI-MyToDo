@@ -120,7 +120,7 @@
 										x:Name="NewToDoTime"/>
 						</HorizontalStackLayout>
 
-						<Label Grid.Row="2" 
+						<!--<Label Grid.Row="2" 
 							   Grid.Column="0" 
 							   FontSize="16" 
 							   TextColor="Black" 
@@ -131,7 +131,7 @@
 
 						<CheckBox Grid.Row="2"
 								  Grid.Column="1"
-								  x:Name="NewToDoIsRecurring"/>
+								  x:Name="NewToDoIsRecurring"/>-->
 
 					</Grid>
 

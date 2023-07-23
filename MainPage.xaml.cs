@@ -1,6 +1,5 @@
 ﻿using MyToDo.Entities;
 using MyToDo.Storage;
-using UIKit;
 
 namespace MyToDo;
 
@@ -64,7 +63,7 @@ public partial class MainPage : ContentPage {
 			</ Grid >
 		</ Frame > -->
 */
-		
+
 		Frame frame = new() {
 			CornerRadius = 10,
 			Padding = 0,
@@ -85,8 +84,8 @@ public partial class MainPage : ContentPage {
 		deadlineHSL.Add(new Label() { Text = "Deadline" });
 		deadlineHSL.Add(new Label() { Text = item.Deadline.ToString() });
 		hsl.Add(deadlineHSL);
-		if (item.IsRecurring)
-			hsl.Add(new Label() { Text = "Recurring" });
+		//if (item.IsRecurring)
+		//	hsl.Add(new Label() { Text = "Recurring" });
 
 		HorizontalStackLayout hslAck = new() { Spacing = 5 };
 		hslAck.Add(new Label() { Text = "Acknowledged:" });
@@ -137,7 +136,7 @@ public partial class MainPage : ContentPage {
 				NewToDoTime.Time.Minutes,
 				NewToDoTime.Time.Seconds
 				),
-			IsRecurring = NewToDoIsRecurring.IsChecked,
+			//IsRecurring = NewToDoIsRecurring.IsChecked,
 			Acknowledged = false
 		};
 
@@ -162,7 +161,7 @@ public partial class MainPage : ContentPage {
 		NewToDoTitle.Text = null;
 		NewToDoTime.Time = new TimeSpan();
 		NewToDoDate.Date = DateTime.Now;
-		NewToDoIsRecurring.IsChecked = false;
+		//NewToDoIsRecurring.IsChecked = false;
 		//ClearNewToDo();
 	}
 
