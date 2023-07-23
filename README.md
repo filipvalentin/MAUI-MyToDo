@@ -9,3 +9,4 @@ I was bored, so I made a To Do app that actually works (Windows only, even if th
 
 In background there is the BackgroundWorker that checks for new to dos and when the deadline is met, a reminder window will appear.
 
+![image](https://github.com/filipvalentin/MAUI-MyToDo/assets/100225320/a8b76797-fb8a-45f8-84c7-d9415f664dec)
